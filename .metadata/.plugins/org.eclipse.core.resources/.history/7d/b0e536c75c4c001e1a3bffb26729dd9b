@@ -1,0 +1,6 @@
+package kr.spring.mapper;
+
+@Mapper // MyBatis가 interface를 찾기위해 달아주는 부분
+public interface BoardMapper {
+
+}
