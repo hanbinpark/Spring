@@ -185,9 +185,8 @@
 				// boardCount.do 요청해서 조회수를 1올리고
 				// 게시글을 다시 불러와 적용시키시오.
 				$.ajax({
-					url : "boardCount.do",
-					type : "get",
-					data : {"idx" : idx},
+					url : "board/count/" + idx,
+					type : "put",
 					success : loadList,
 					error : function(){alert("error");}
 				});
@@ -232,9 +231,10 @@
 	         // 수정된 게시글 다시 불러와서 적용시키시오 (숙제)
 	         
 	         $.ajax({
-	        	url : "boardUpdate.do",
-	        	type : "post",
-	        	data : {"idx" : idx, "title":title, "content":content, "writer":writer},
+	        	url : "board/update",
+	        	type : "put",
+	        	contentType : "application/json;charset=utf-8", // put방식의 비동기통신일 경우 json타입 명시해줘야하고
+	        	data : JSON.stringify({"idx" : idx, "title":title, "content":content, "writer":writer}) , // 문자열로 바꿔서 보내줘야함
 	        	success : loadList,
 	        	error : function(){alert("error");}
 	         });
