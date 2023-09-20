@@ -1,5 +1,9 @@
 package kr.spring.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.spring.entity.Member;
 import kr.spring.mapper.MemberMapper;
@@ -120,7 +127,7 @@ public class MemberController {
 	@RequestMapping("/update.do")
 	public String update(Member m, RedirectAttributes rttr, HttpSession session) {
 		
-		m.setMemProfile("");
+		
 		// mapper의 update메소드를 통해 해당 회원의 정보를 수정하시오
 		// 조건1. 하나라도 입력안한 데이터가 있으면 updateForm.jsp로 다시 돌려보내면서
 		// 		updateForm.jsp에서는 "모든 내용을 입력하세요"라는 모달창을 띄우세요
@@ -147,6 +154,7 @@ public class MemberController {
 			return "redirect:/updateForm.do";
 		}else {
 		
+			m.setMemProfile("");
 			int cnt = mapper.update(m);
 			if(cnt == 1) {
 				System.out.println("회원정보수정 성공!");
@@ -162,4 +170,88 @@ public class MemberController {
 			}
 		}
 	}
+
+	@RequestMapping("/imageForm.do")
+	public String imageForm() {
+		return "member/imageForm";
+	}
+	
+	@RequestMapping("/imageUpdate.do")
+	public String imageUpdate(HttpServletRequest request, HttpSession session, RedirectAttributes rttr) {
+		// 파일업로드를 할 수 있게 도와주는 객체 (cos.jar)
+		// 파일업로드를 할 수 있게 도와주는 MultipartRequest 객체를 생성하기 위해서는
+		// 5개의 정보가 필요하다
+		// 요청데이터, 저장경로, 최대크기, 인코딩방식, 파일명 중복제거여부
+		
+		MultipartRequest multi = null;
+		
+		// 저장경로
+		String savePath = request.getRealPath("resources/upload");
+		// 이미지 최대크기
+		int fileMaxSize = 10 * 1024 * 1024 * 10;
+		
+		// 기존 해당 프로필 이미지 삭제
+		// - 로그인한 사람의 프로필 값을 가져와야함
+		String memID = ((Member)session.getAttribute("mvo")).getMemID();
+		
+		// getMember 메소드는 memID와 일치하는 회원의 정보 (Member)를 가져온다
+		String oldImg = mapper.getMember(memID).getMemProfile();
+
+		// 기존의 프로필 사진 삭제
+		File oldFile = new File(savePath +"/" +oldImg);
+		if(oldFile.exists()) {
+			oldFile.delete();
+		}
+		
+		
+		try {
+			multi = new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// 내가 업로드한 파일 가져오기
+		File file = multi.getFile("memProfile");
+		
+		if(file != null) { // 업로드가 된 상태
+			//System.out.println(file.getName());
+			String ext = file.getName().substring(file.getName().lastIndexOf(".")+1);
+			ext = ext.toUpperCase();
+			
+			if(!(ext.equals("PNG") || ext.equals("GIF") || ext.equals("JPG"))) {
+				if(file.exists()) {
+					file.delete();
+					rttr.addFlashAttribute("msgType", "실패메세지");
+					rttr.addFlashAttribute("msg", "이미지 파일만 가능합니다.(PNG, JPG, GIF)");
+					return "redirect:/imageForm.do";
+				}
+			}
+		}
+		
+		
+		// 업로드한 파일의 이름을 가져오는 코드
+		String newProfile = multi.getFilesystemName("memProfile");
+		
+		Member mvo = new Member();
+		mvo.setMemID(memID);
+		mvo.setMemProfile(newProfile);
+		
+		mapper.profileUpdate(mvo);
+		
+		// 사진 업데이트 후 수정된 회둰정보를 다시 가져와서 세션에 담기
+		Member m = mapper.getMember(memID);
+		session.setAttribute("mvo", m);
+		
+		rttr.addFlashAttribute("msgType", "성공메세지");
+		rttr.addFlashAttribute("msg", "이미지 변경이 성공했습니다.");
+		return "redirect:/";
+	}
+
+
+
+
+
+
+
 }
