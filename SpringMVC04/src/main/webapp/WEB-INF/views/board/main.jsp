@@ -79,6 +79,15 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+		// ajax에서도 post방식으로 데이터를 보내기 위해서는
+		// csrf token값을 전달해야한다
+		
+		// token의 이름과 값을 가져오기
+		// ajax에서 csrf의 이름을 사용할 때는 parameterName이 아니라 headerName사용
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrf.token}";
+		
 		$(document).ready(function(){
 			// HTML이 다 로딩되고나서 아래 코드 실행
 			loadList();
@@ -170,6 +179,9 @@
 				url : "board/new",
 				type : "post",
 				data : fData,
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+				},
 				success : loadList,
 				error : function(){	alert("error")}
 				
@@ -202,6 +214,9 @@
 				$.ajax({
 					url : "board/count/" + idx,
 					type : "put",
+					beforeSend : function(xhr){
+						xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+					},
 					success : loadList,
 					error : function(){alert("error");}
 				});
@@ -214,6 +229,9 @@
 				url : "board/" + idx,
 				type : "delete",
 				data : {"idx" : idx},
+				beforeSend : function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+				},
 				success : loadList,
 				error : function(){alert("error");}
 				
@@ -250,7 +268,10 @@
 	        	type : "put",
 	        	contentType : "application/json;charset=utf-8", // put방식의 비동기통신일 경우 json타입 명시해줘야하고
 	        	data : JSON.stringify({"idx" : idx, "title":title, "content":content, "writer":writer}) , // 문자열로 바꿔서 보내줘야함
-	        	success : loadList,
+	        	beforeSend : function(xhr){
+					xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+				},
+				success : loadList,
 	        	error : function(){alert("error");}
 	         });
 	         

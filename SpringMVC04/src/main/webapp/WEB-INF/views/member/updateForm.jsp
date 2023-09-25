@@ -23,7 +23,7 @@
 	    	
 	    <div class="panel-body">
 	    <form action="${contextPath}/update.do" method="post">
-	    
+	    	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	    	<input type="hidden" name="memPassword" id="memPassword" value="">
 	    	<input type="hidden" name="memID" id="memID" value="${mvo.memID }">
 	    	<input type="hidden" name="memProfile" id="memProfile" value="${mvo.memProfile }">
