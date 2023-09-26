@@ -207,13 +207,12 @@ public class MemberController {
 						
 			int cnt = mapper.update(m);
 			if(cnt == 1) {
-				System.out.println("회원정보수정 성공!");
 				rttr.addFlashAttribute("msgType", "성공메세지");
 				rttr.addFlashAttribute("msg", "회원수정이 성공했습니다");
-				session.setAttribute("mvo", m);
+				Member info = mapper.getMember(m.getMemID());
+				session.setAttribute("mvo", info);
 				return "redirect:/";
 			}else {
-				System.out.println("회원정보수정 실패...");
 				rttr.addFlashAttribute("msgType", "실패메세지");
 				rttr.addFlashAttribute("msg", "회원수정이 실패했습니다");
 				return "redirect:/updateForm.do";
