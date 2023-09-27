@@ -32,7 +32,7 @@ public class MemberUser extends User {
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuth())) /*List<Auth> -> collection 안에 들어갈 수 있게 변경 */
 				.collect(Collectors.toList()) /* 최종 컬렉션 리스트로 변경 */
 				);
-		this.member = mvo;
+		this.member = mvo; // 나머지 계정정보를 넣기위해
 		
 	}
 }

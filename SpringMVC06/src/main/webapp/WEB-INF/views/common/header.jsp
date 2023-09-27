@@ -97,7 +97,7 @@
 	      		</li>
 		        <li><a href="${contextPath}/updateForm.do"><span class="glyphicon glyphicon-pencil">회원정보수정</span></a></li>
 		        <li><a href="${contextPath}/imageForm.do"><span class="glyphicon glyphicon-upload">프로필사진등록</span></a></li>
-		        <li><a href="${contextPath}/logout.do"><span class="glyphicon glyphicon-log-out">로그아웃</span></a></li>
+		        <li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-out">로그아웃</span></a></li>
 	        </li>
 	      </ul>
 	      </security:authorize>
@@ -106,5 +106,39 @@
 	    </div>
 	  </div>
 	</nav>
+	
+	
+	<script type="text/javascript">
+	
+		// CSRF 토큰 값 가져오기
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrf.token}";
+		
+		 function logout(){
+		      $.ajax({
+		         url : "${contextPath}/logout",
+		         type : "post",
+		         beforeSend : function(xhr){
+		            xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		         },
+		         success : function(){
+		            location.href = "${contextPath}/";
+		         }, 
+		         error : function(){
+		            alert("error");
+		         }
+		      });
+		   }
+	
+	
+	
+	
+	
+	
+	</script>
+	
+	
+	
+	
 </body>
 </html>

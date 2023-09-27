@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="kr.spring.entity.Board"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="javax.xml.ws.RequestWrapper"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
@@ -47,17 +43,21 @@
     <fullyQualifiedTypeName name="kr.spring.config.SecurityConfig"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="kr.spring.mapper.MemberMapper"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="kr.spring.entity.Member"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.GrantedAuthority"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
-    <fullyQualifiedTypeName name="kr.spring.entity.MemberUser"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="kr.spring.entity.MemberUser"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.context.SecurityContextHolder"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
     <fullyQualifiedTypeName name="kr.spring.security.MemberUserDetailsService"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.UsernamePasswordAuthenticationToken"/>
 </qualifiedTypeNameHistroy>
