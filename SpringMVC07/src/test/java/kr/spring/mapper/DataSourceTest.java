@@ -53,25 +53,28 @@ public class DataSourceTest {
 	}
 	// -- 여기까지
 	
-	@Test
-	public void testInsert() {
-		Board vo = new Board();
-		vo.setMemID("aischool");
-		vo.setTitle("다음주 화요일");
-		vo.setContent("코딩페스티벌");
-		vo.setWriter("교육운영부");
-		mapper.insertSelectKey(vo);
-	}
+
+	
 	
 //	@Test
-//	public void testController() throws Exception{
-//		
-//		log.info(
-//				mockMvc.perform(MockMvcRequestBuilders.get("/board/list")) // perform -> 요청하다
-//				.andReturn() // return값을 받아오겠다
-//				.getModelAndView() // controller의 model값과 view경로를 다 받아오겠다
-//				);
+//	public void testInsert() {
+//		Board vo = new Board();
+//		vo.setMemID("aischool");
+//		vo.setTitle("다음주 화요일");
+//		vo.setContent("코딩페스티벌");
+//		vo.setWriter("교육운영부");
+//		mapper.insertSelectKey(vo);
 //	}
+	
+	@Test
+	public void testController() throws Exception{
+		
+		log.info(
+				mockMvc.perform(MockMvcRequestBuilders.get("/board/modify?idx=1")) // perform -> 요청하다
+				.andReturn() // return값을 받아오겠다
+				.getModelAndView() // controller의 model값과 view경로를 다 받아오겠다
+				);
+	}
 	
 //	@Test
 //	public void testGetList() {
