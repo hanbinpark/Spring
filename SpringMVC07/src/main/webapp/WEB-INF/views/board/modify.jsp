@@ -29,12 +29,12 @@
     			</tr>
     			<tr>
 	    			<td>제목</td>
-	    			<td><input type="text" name="title" class="form-control" value="${vo.title }"></td>
+	    			<td><input type="text" name="title" class="form-control" value="<c:out value='${vo.title}'/>"></td>
     			</tr>
     			<tr>
 	    			<td>내용</td>
 	    			<td>
-	    				<textarea name="content" class="form-control" rows="10" cols="">${vo.content }</textarea>
+	    				<textarea name="content" class="form-control" rows="10" cols=""><c:out value="${vo.content}"/></textarea>
 	    			</td>
     			</tr>
     			<tr>
@@ -46,17 +46,21 @@
 	    			<td colspan="2" style="text-align:center;">
 	    				<c:if test="${not empty mvo && mvo.memID eq vo.memID}">
 		    				<button type="submit" class="btn btn-sm btn-primary">수정</button>
-		    				<button type="button" onclick="location.href='${cpath}/board/remove?idx=${vo.idx}'" class="btn btn-sm btn-success">삭제</button>
+		    				<button data-btn="remove" type="button" class="btn btn-sm btn-success">삭제</button>
 	    				</c:if>
 	    				<c:if test="${empty mvo or mvo.memID ne vo.memID}">
 		    				<button disabled="disabled" type="submit" class="btn btn-sm btn-primary">수정</button>
-		    				<button disabled="disabled" type="button" onclick="location.href='${cpath}/board/remove?idx=${vo.idx}'" class="btn btn-sm btn-success">삭제</button>
+		    				<button disabled="disabled" type="button" class="btn btn-sm btn-success">삭제</button>
 	    				</c:if>
-	    				<button type="button" onclick="location.href='${cpath}/board/list'" class="btn btn-sm btn-warning">목록</button>
+	    				<button data-btn="list" type="button" class="btn btn-sm btn-warning">목록</button>
 	    			</td>
 	    		</tr>
-	    	</table>
-	    		</form>	
+	    		</table>
+	    	</form>	
+	    		
+	    	<form id="frm" method="get" action="">
+	    		<input id="idx" type="hidden" name="idx" value="${vo.idx }">
+	    	</form>
 	    		
 	    		
 	    </div>
@@ -66,7 +70,22 @@
 	</div>
 	
 	<script type="text/javascript">
-		
+		// 링크처리
+		$(document).ready(function(){
+			$("button").on("click",function(e){
+				var formData = $("#frm");
+				var btn = $(this).data("btn");
+				if(btn == "remove"){
+					formData.attr("action","${cpath}/board/remove");
+				}else if(btn == "list"){
+					formData.attr("action","${cpath}/board/list");
+					formData.find("#idx").remove();
+				}
+				
+				formData.submit();
+			});
+			
+		});
 	
 	
 	</script>

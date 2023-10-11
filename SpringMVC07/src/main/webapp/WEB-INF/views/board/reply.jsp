@@ -28,7 +28,7 @@
 	    		<input type="hidden" name="idx" value="${vo.idx }">
 	    		<div class="form-group">
 	    			<label>제목</label>
-	    			<input value="${vo.title }" type="text" name="title" class="form-control">
+	    			<input value="<c:out value='${vo.title}'/>" type="text" name="title" class="form-control">
 	    		</div>
 	    	
 	    		<div class="form-group">
@@ -43,11 +43,13 @@
 	    		
 	    		<button type="submit" class="btn btn-default btn-sm">등록</button>
 	    		<button type="reset" class="btn btn-default btn-sm">취소</button>
-	    		<button type="button" class="btn btn-default btn-sm" onclick="location.href='${cpath}/board/list'">목록</button>
+	    		<button type="button" class="btn btn-default btn-sm" data-btn="list">목록</button>
 	    	
 	    	</form>
 	    			
-	    		
+	    	<form id="frm" method="get" action="">
+	    		<input id="idx" type="hidden" name="idx" value="${vo.idx }">
+	    	</form>
 	    		
 	    </div>
 	    
@@ -56,7 +58,20 @@
 	</div>
 	
 	<script type="text/javascript">
-		
+		// 링크처리
+		$(document).ready(function(){
+			$("button").on("click",function(e){
+				var formData = $("#frm");
+				var btn = $(this).data("btn");
+				if(btn == "list"){
+					formData.attr("action","${cpath}/board/list");
+					formData.find("#idx").remove();
+				}
+				
+				formData.submit();
+			});
+			
+		});
 	
 	
 	</script>

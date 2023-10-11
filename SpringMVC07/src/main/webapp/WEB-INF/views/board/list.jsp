@@ -70,15 +70,31 @@
 	    				<tr>
 	    					<td>${i.count}</td>
 	    					<td>
-	    						<a href="${cpath}/board/get?idx=${vo.idx}">
-	    					
-	    					<c:if test="${vo.boardLevel > 0}">
-	    						<c:forEach begin="1" end="${vo.boardLevel}" step="1">
-	    							<span style="padding-left:15px"></span>
-	    						</c:forEach>
-	    						ㄴ[RE]
+	    					<c:if test="${vo.boardAvailable == 0 }">
+	    						<a href="javascript:alert('삭제된 게시글입니다.')">
+    							<c:if test="${vo.boardLevel > 0}">
+		    						<c:forEach begin="1" end="${vo.boardLevel}" step="1">
+		    							<span style="padding-left:15px"></span>
+		    						</c:forEach>
+		    						ㄴ[RE]
+		    					</c:if>
+	    							
+	    						삭제된 게시물입니다.
+	    						</a>
 	    					</c:if>
-	    					${vo.title}</a>
+	    					
+	    					<c:if test="${vo.boardAvailable > 0 }">
+	    						<a href="${cpath}/board/get?idx=${vo.idx}">
+		    					<c:if test="${vo.boardLevel > 0}">
+		    						<c:forEach begin="1" end="${vo.boardLevel}" step="1">
+		    							<span style="padding-left:15px"></span>
+		    						</c:forEach>
+		    						ㄴ[RE]
+		    					</c:if>
+		    					<c:out value="${vo.title }"/>
+		    					</a>
+		    				</c:if>	
+		    				
 	    					</td>
 	    					<td>${vo.writer}</td>
 	    					<td>
