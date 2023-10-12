@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="cpath" value="${pageContext.request.contextPath }"/>
+<c:set var="cpath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -21,62 +21,75 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">Board</div>
 	    <div class="panel-body">
-	    	<form action="${cpath }/board/reply" method="post">
-	    	
-	    		<input type="hidden" name="memID" value="${mvo.memID }">
-	    		<!-- 부모글의 게시글번호 -->
-	    		<input type="hidden" name="idx" value="${vo.idx }">
+	    	<form action="${cpath}/board/reply" method="post">
+
+				<input type="hidden" name="memID" value="${mvo.memID}">
+				<!-- 부모글의 게시글 번호 -->
+				<input type="hidden" name="idx" value="${vo.idx}"> 
+	    	 
 	    		<div class="form-group">
 	    			<label>제목</label>
-	    			<input value="<c:out value='${vo.title}'/>" type="text" name="title" class="form-control">
+	    			<input value="<c:out value='${vo.title}' />" type="text" name="title" class="form-control">
 	    		</div>
-	    	
+	    		
 	    		<div class="form-group">
 	    			<label>답변</label>
 	    			<textarea class="form-control" name="content" rows="10" cols=""></textarea>
 	    		</div>
-	    		
+	    	
 	    		<div class="form-group">
 	    			<label>작성자</label>
-	    			<input value="${mvo.memName }" readonly="readonly" type="text" name="writer" class="form-control">
+	    			<input value="${mvo.memName}" readonly="readonly" type="text" name="writer" class="form-control">
 	    		</div>
 	    		
 	    		<button type="submit" class="btn btn-default btn-sm">등록</button>
 	    		<button type="reset" class="btn btn-default btn-sm">취소</button>
-	    		<button type="button" class="btn btn-default btn-sm" data-btn="list">목록</button>
+	    		<button data-btn="list" type="button" class="btn btn-default btn-sm">목록</button>
+	    	</form>
 	    	
-	    	</form>
-	    			
 	    	<form id="frm" method="get" action="">
-	    		<input id="idx" type="hidden" name="idx" value="${vo.idx }">
+	    		<input id="idx" type="hidden" name="idx" value="${vo.idx}">
 	    	</form>
-	    		
 	    </div>
-	    
-	    <div class="panel-footer">스프링게시판 - 박한빈</div>
+	    <div class="panel-footer">스프링게시판 - 박병관</div>
 	  </div>
 	</div>
 	
 	<script type="text/javascript">
-		// 링크처리
-		$(document).ready(function(){
-			$("button").on("click",function(e){
-				var formData = $("#frm");
-				var btn = $(this).data("btn");
-				if(btn == "list"){
-					formData.attr("action","${cpath}/board/list");
-					formData.find("#idx").remove();
-				}
-				
-				formData.submit();
-			});
+	// 링크처리
+	$(document).ready(function(){
+		$("button").on("click", function(e){
+			var formData = $("#frm");
+			var btn = $(this).data("btn");
+
+			if(btn == "list"){
+				formData.attr("action","${cpath}/board/list");
+				formData.find("#idx").remove();
+			}
+			
+			formData.submit();
 			
 		});
-	
-	
+	});
 	</script>
-	
-	
 	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

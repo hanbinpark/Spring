@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
-@NoArgsConstructor // 필수
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Board {
-
+	
 	private int idx;
 	private String memID;
 	private String title;
@@ -25,4 +25,9 @@ public class Board {
 	private int boardSequence;
 	private int boardLevel;
 	private int boardAvailable;
+	
 }
+
+
+
+

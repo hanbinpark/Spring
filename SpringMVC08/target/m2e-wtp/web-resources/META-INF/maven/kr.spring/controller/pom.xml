@@ -32,7 +32,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -40,7 +40,7 @@
 		</dependency>
 		
 		
-		
+				
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -123,9 +123,9 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
 		
-		<!-- lombok API 추가  -->
+		<!-- lombok API 추가 -->
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
@@ -134,15 +134,15 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!-- MyBatis를 사용하기 위한 API추가  -->
+		<!-- MyBatis를 사용하기위한 API추가 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
 		    <version>3.4.6</version>
 		</dependency>
-		    
-		<!-- Connection Pool을 사용하기 위한 HikariCP API 추가 -->
+		
+		<!-- Connection Pool을 사용하기위한 HikariCP API 추가 -->
 		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 		<dependency>
 		    <groupId>com.zaxxer</groupId>
@@ -150,22 +150,22 @@
 		    <version>3.4.1</version>
 		</dependency>
 		
-		<!-- MyBatis에서 Connection을 하기위한 mySQL Driver API 추가 -->
+		<!-- MyBatis에서 Connection을 하기위한 MySQL Driver API 추가 -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.42</version>
 		</dependency>
-				
-		<!-- Spring에서 MyBatis를 통해 JDBC를 사용하기 위한 API 추가 -->
+		
+		<!-- Spring에서 MyBatis를 통해 JDBC를 사용하기위한 API 추가 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>5.0.2.RELEASE</version>
 		</dependency>
-				
+		
 		<!-- MyBatis와 Spring을 연결해주는 API -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
@@ -175,9 +175,7 @@
 		</dependency>
 		
 		
-		
-		
-		
+		       
 	</dependencies>
     <build>
         <plugins>
