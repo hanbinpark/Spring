@@ -21,34 +21,35 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">Board</div>
 	    <div class="panel-body">
-	    	<form action="${cpath}/board/reply" method="post">
-
-				<input type="hidden" name="memID" value="${mvo.memID}">
+	    	<form id="frm" method="post">
+				<input type="hidden" name="page" value="${cri.page}">
+				<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
+				
+				<input id="memID" type="hidden" name="memID" value="${mvo.memID}">
 				<!-- 부모글의 게시글 번호 -->
-				<input type="hidden" name="idx" value="${vo.idx}"> 
+				<input id="idx" type="hidden" name="idx" value="${vo.idx}"> 
 	    	 
 	    		<div class="form-group">
 	    			<label>제목</label>
-	    			<input value="<c:out value='${vo.title}' />" type="text" name="title" class="form-control">
+	    			<input id="title" value="<c:out value='${vo.title}' />" type="text" name="title" class="form-control">
 	    		</div>
 	    		
 	    		<div class="form-group">
 	    			<label>답변</label>
-	    			<textarea class="form-control" name="content" rows="10" cols=""></textarea>
+	    			<textarea id="content" class="form-control" name="content" rows="10" cols=""></textarea>
 	    		</div>
 	    	
 	    		<div class="form-group">
 	    			<label>작성자</label>
-	    			<input value="${mvo.memName}" readonly="readonly" type="text" name="writer" class="form-control">
+	    			<input id="writer" value="${mvo.memName}" readonly="readonly" type="text" name="writer" class="form-control">
 	    		</div>
 	    		
-	    		<button type="submit" class="btn btn-default btn-sm">등록</button>
-	    		<button type="reset" class="btn btn-default btn-sm">취소</button>
+	    		<button data-btn="reply" type="button" class="btn btn-default btn-sm">답변</button>
+	    		<button data-btn="reset"type="button" class="btn btn-default btn-sm">취소</button>
 	    		<button data-btn="list" type="button" class="btn btn-default btn-sm">목록</button>
-	    	</form>
 	    	
-	    	<form id="frm" method="get" action="">
-	    		<input id="idx" type="hidden" name="idx" value="${vo.idx}">
+	    	
+	    		
 	    	</form>
 	    </div>
 	    <div class="panel-footer">스프링게시판 - 박병관</div>
@@ -64,7 +65,19 @@
 
 			if(btn == "list"){
 				formData.attr("action","${cpath}/board/list");
+				formData.attr("method", "get");
+				
 				formData.find("#idx").remove();
+				formData.find("#memID").remove();
+				formData.find("#title").remove();
+				formData.find("#content").remove();
+				formData.find("#writer").remove();
+				
+			}else if(btn =="reply"){
+				formData.attr("action","${cpath}/board/reply");
+			}else if(btn =="reset"){
+				formData[0].reset();
+				return;
 			}
 			
 			formData.submit();
