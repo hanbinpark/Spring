@@ -31,6 +31,8 @@ public class BoardController {
 		service.reply(vo);
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
 		return "redirect:/board/list";
 	}
 	
@@ -46,6 +48,8 @@ public class BoardController {
 		service.remove(idx);
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
 		return "redirect:/board/list";
 	}
 	
@@ -54,6 +58,8 @@ public class BoardController {
 		service.modify(vo);
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
 		return "redirect:/board/list";
 	}
 	

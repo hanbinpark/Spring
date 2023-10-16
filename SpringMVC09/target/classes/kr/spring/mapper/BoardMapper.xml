@@ -13,8 +13,7 @@
       </if>
    </sql>
 
-   <select id="getList" parameterType="kr.spring.entity.Criteria"
-      resultType="kr.spring.entity.Board">
+   <select id="getList" parameterType="kr.spring.entity.Criteria" resultType="kr.spring.entity.Board">
       SELECT * FROM TBLBOARD
       <include refid="search"/>
       ORDER BY BOARDGROUP DESC, BOARDSEQUENCE ASC
