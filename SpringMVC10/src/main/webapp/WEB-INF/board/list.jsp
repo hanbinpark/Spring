@@ -79,6 +79,9 @@
 	    			<div class="card" style="min-height: 500px; max-height: 1000px;">
 	    				<div class="card-body">
 							<form id="regForm" action="${cpath}/register" method="post">
+							
+								<input type="hidden" id="idx" name="idx" value="">
+								
 	    						<div class="form-group">
 	    							<label for="title">제목</label>
 	    							<input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
@@ -91,8 +94,18 @@
 	    							<label for="writer">작성자</label>
 	    							<input type="text" class="form-control" id="writer" name="writer" placeholder="Enter Writer">
 	    						</div>
+	    						<div id="regDiv">
 	    						<button type="button" data-oper="register" class="btn btn-sm btn-primary">등록</button>
 	    						<button type="button" data-oper="reset" class="btn btn-sm btn-warning">취소</button>
+	    						</div>
+	    						
+	    						<div id="updateDiv" style="display: none;">
+		    						<button type="button" data-oper="list" class="btn btn-sm btn-primary">목록</button>
+		    						<span id="update">
+		    						<button type="button" data-oper="updateForm" class="btn btn-sm btn-warning">수정</button>
+		    						</span>
+		    						<button type="button" data-oper="remove" class="btn btn-sm btn-success">삭제</button>
+	    						</div>
 	    					</form>	    				
 	    				</div>
 	    			</div>
@@ -113,6 +126,17 @@
 	  				regForm.submit();
 	  			}else if(oper=="reset"){
 	  				regForm[0].reset();
+	  			}else if(oper=="list"){
+	  				location.href="${cpath}/list";
+	  			}else if(oper=="remove"){
+					var idx = regForm.find("#idx").val();
+					location.href="${cpath}/remove?idx="+idx;
+	  			}else if(oper=="updateForm"){
+	  				regForm.find("#title").attr("readonly",false);
+	  				regForm.find("#content").attr("readonly",false);
+	  				
+	  				var upBtn = "<button onclick='goUpdate()' type='button' class='btn btn-sm btn-info'>수정완료</button>";
+	  				$("#update").html(upBtn);
 	  			}
 	  		});
 	  		
@@ -140,6 +164,18 @@
 			
 			regForm.find("input").attr("readonly",true);
 			regForm.find("textarea").attr("readonly",true);
+			
+			$("#regDiv").css("display","none");
+			$("#updateDiv").css("display","block");
+			
+			regForm.find("#idx").val(vo.idx);
+			
+	  	}
+	  	
+	  	function goUpdate(){
+	  		var regForm = $("#regForm");
+	  		regForm.attr("action","${cpath}/modify");
+	  		regForm.submit();
 	  	}
 	  
 	  </script>
