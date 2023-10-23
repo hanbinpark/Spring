@@ -15,3 +15,7 @@ VALUES('오늘 저녁에 하늘마당 고', '내가 치킨쏜다', '명훈쌤');
 INSERT INTO BOARD(TITLE, CONTENT, WRITER)
 VALUES('나는요', '아이쿠', '아이유');
 
+DROP TABLE AUTH;
+DROP TABLE MEMBER;
+
+SELECT * FROM MEMBER;
